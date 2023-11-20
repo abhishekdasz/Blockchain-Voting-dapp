@@ -15,7 +15,7 @@ const Admin = () => {
       const [candidateAddress, setCandidateAddress] = useState("");
       const [candidates, setCandidates] = useState([]);
     
-      const contractAddress = process.env.CONTRACT_ADDRESS;
+      const contractAddress = '0x735335e988932CFbEF980dcD53C7a49c03c693Ae';
       const contractAbi = abi.abi;
 
       const addNewCandidate = async () => {
