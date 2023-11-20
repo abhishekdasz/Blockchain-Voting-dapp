@@ -135,3 +135,5 @@ contract Voting {
         return hasRegistered[msg.sender];
     }
 }
+
+
