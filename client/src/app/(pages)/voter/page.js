@@ -4,8 +4,10 @@ import { ethers } from "ethers";
 import abi from '../../contract/Voting.json'
 import LoginVoter from '@/app/components/LoginVoter'
 import VoterReg from '@/app/components/VoterReg'
+import { useRouter } from 'next/navigation';
 
 const page = () => {
+  const router = useRouter();
   const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -65,6 +67,11 @@ const page = () => {
       console.log(status);
       setVotingStatus(status);
     }
+
+    const handleVoterLogout = () => {
+      router.push('/')
+    }
+
   return (
     <div>
       <div className="reg-voter">
@@ -73,6 +80,9 @@ const page = () => {
       ) : (
         <LoginVoter connectWallet={connectContract} />
       )}
+      </div>
+      <div className="logout">
+        <button onClick={handleVoterLogout}> Logout </button>
       </div>
     </div>
   )

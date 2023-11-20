@@ -47,10 +47,10 @@ contract Voting {
         _;
     }
 
-    constructor(uint256 _durationInMinutes) {
+    constructor(uint256 _durationInMinutes, address _admin) {
         require(_durationInMinutes > 0, "Voting duration must be greater than zero");
 
-        admin = msg.sender;
+        admin = _admin;
         votingStart = block.timestamp;
         votingEnd = block.timestamp + (_durationInMinutes * 1 minutes);
     }
@@ -134,6 +134,8 @@ contract Voting {
     function isRegisteredVoter() public view returns (bool) {
         return hasRegistered[msg.sender];
     }
+
+    function isAdmin() public view returns (bool) {
+        return msg.sender == admin;
+    }
 }
-
-
