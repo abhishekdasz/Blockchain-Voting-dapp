@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Login = ({connectWallet}) => {
+const AdminLogin = ({connectWallet}) => {
   return (
     <div>
         <button onClick={connectWallet}> Admin Login </button>
@@ -8,4 +8,4 @@ const Login = ({connectWallet}) => {
   )
 }
 
-export default Login
+export default AdminLogin

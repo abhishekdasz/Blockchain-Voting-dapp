@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ethers } from "ethers";
 import abi from '../contract/Voting.json'
 
-const Admin = () => {
+const AddCandidate = () => {
     if (!window.ethereum) {
         console.error("Ethereum provider not detected. Please make sure MetaMask or another Ethereum provider is installed.");
         return <div>Ethereum provider not available</div>; // Or handle the lack of provider in your application
@@ -15,7 +15,7 @@ const Admin = () => {
       const [candidateAddress, setCandidateAddress] = useState("");
       const [candidates, setCandidates] = useState([]);
     
-      const contractAddress = '0x735335e988932CFbEF980dcD53C7a49c03c693Ae';
+      const contractAddress = '0x1C55493385aE66B103E5A7dfDFF24b4C52F63E13';
       const contractAbi = abi.abi;
 
       const addNewCandidate = async () => {
@@ -103,4 +103,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default AddCandidate

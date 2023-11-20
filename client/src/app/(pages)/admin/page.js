@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { ethers } from "ethers";
 import abi from '../../contract/Voting.json'
-import Login from '@/app/components/Login';
-import Admin from '@/app/components/Admin';
+import AdminLogin from '@/app/components/AdminLogin';
+import AddCandidate from '@/app/components/AddCandidate';
 
 
 const page = () => {
@@ -13,7 +13,7 @@ const page = () => {
     const [isConnected, setIsConnected] = useState(false);
     const [votingStatus, setVotingStatus] = useState(false);
 
-    const contractAddress = '0x735335e988932CFbEF980dcD53C7a49c03c693Ae';
+    const contractAddress = '0x1C55493385aE66B103E5A7dfDFF24b4C52F63E13';
     const contractAbi = abi.abi;
 
     // Connect to Metamask
@@ -73,9 +73,9 @@ const page = () => {
       Admin
       <div className="login-admin">
       {isConnected ? (
-        <Admin account={account} provider={provider} />
+        <AddCandidate account={account} provider={provider} />
       ) : (
-        <Login connectWallet={connectContract} />
+        <AdminLogin connectWallet={connectContract} />
       )}
       </div>
     </div>

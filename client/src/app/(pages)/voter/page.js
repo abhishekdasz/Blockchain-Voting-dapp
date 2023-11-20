@@ -11,7 +11,7 @@ const page = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [votingStatus, setVotingStatus] = useState(false);
 
-  const contractAddress = '0x735335e988932CFbEF980dcD53C7a49c03c693Ae';
+  const contractAddress = '0x1C55493385aE66B103E5A7dfDFF24b4C52F63E13';
   const contractAbi = abi.abi;
 
   // Connect to Metamask
