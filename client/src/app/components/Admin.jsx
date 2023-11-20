@@ -15,7 +15,7 @@ const Admin = () => {
       const [candidateAddress, setCandidateAddress] = useState("");
       const [candidates, setCandidates] = useState([]);
     
-      const contractAddress = '0x614321bFe0C6eD40b50298aE9FbA3688052AD978';
+      const contractAddress = process.env.CONTRACT_ADDRESS;
       const contractAbi = abi.abi;
 
       const addNewCandidate = async () => {
@@ -39,8 +39,6 @@ const Admin = () => {
     
           // After adding a candidate, fetch and display all candidates
           getAllCandidates();
-    
-          router.push('/voter');
         } catch (error) {
           console.error("Error adding candidate:", error);
         }
