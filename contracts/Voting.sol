@@ -139,3 +139,4 @@ contract Voting {
         return msg.sender == admin;
     }
 }
+
