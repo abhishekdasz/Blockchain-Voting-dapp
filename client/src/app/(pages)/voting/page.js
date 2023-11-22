@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import abi from "../../contract/Voting.json";
 import { useRouter } from "next/navigation";
+import CON_ADDRESS from "@/app/constants";
 
 const page = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const page = () => {
   const [candidates, setCandidates] = useState([]);
   const [hasVoted, setHasVoted] = useState(false);
 
-  const contractAddress = '0x1C55493385aE66B103E5A7dfDFF24b4C52F63E13';
+  const contractAddress = CON_ADDRESS;
   const contractAbi = abi.abi;
 
   const voteForCandidate = async () => {

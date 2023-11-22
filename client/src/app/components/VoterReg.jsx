@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import abi from "../contract/Voting.json";
 import { useRouter } from "next/navigation";
+import CON_ADDRESS from "../constants";
 
 const VoterReg = () => {
   const router = useRouter();
@@ -10,7 +11,7 @@ const VoterReg = () => {
   const [voterAge, setVoterAge] = useState("");
   const [isRegistered, setIsRegistered] = useState(false);
 
-  const contractAddress = '0x1C55493385aE66B103E5A7dfDFF24b4C52F63E13';
+  const contractAddress = CON_ADDRESS;
   const contractAbi = abi.abi;
 
   useEffect(() => {
@@ -65,7 +66,7 @@ const VoterReg = () => {
         // After registering a voter, fetch and display all voters
         // (you can choose to redirect to the voting page here if needed)
         setIsRegistered(true);
-        // router.push('/voting');  // Uncomment this line if you want to redirect after registration
+        router.push('/voting');  // Uncomment this line if you want to redirect after registration
       } else {
         console.error("Transaction failed. Check contract events for more details.");
       }

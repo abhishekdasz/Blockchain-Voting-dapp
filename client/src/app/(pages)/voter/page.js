@@ -5,6 +5,7 @@ import abi from '../../contract/Voting.json'
 import LoginVoter from '@/app/components/LoginVoter'
 import VoterReg from '@/app/components/VoterReg'
 import { useRouter } from 'next/navigation';
+import CON_ADDRESS from '@/app/constants';
 
 const page = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const page = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [votingStatus, setVotingStatus] = useState(false);
 
-  const contractAddress = '0x1C55493385aE66B103E5A7dfDFF24b4C52F63E13';
+  const contractAddress = CON_ADDRESS;
   const contractAbi = abi.abi;
 
   // Connect to Metamask

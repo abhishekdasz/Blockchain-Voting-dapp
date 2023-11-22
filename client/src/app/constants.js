@@ -1,0 +1,3 @@
+const CON_ADDRESS = '0x1Ec1f9b33F73EcD62DEfCCf6A7A44E30124aC85c';
+
+export default CON_ADDRESS;

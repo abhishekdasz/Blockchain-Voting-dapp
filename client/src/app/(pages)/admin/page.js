@@ -5,6 +5,7 @@ import abi from '../../contract/Voting.json';
 import AdminLogin from '@/app/components/AdminLogin';
 import AddCandidate from '@/app/components/AddCandidate';
 import { useRouter } from 'next/navigation';
+import CON_ADDRESS from '@/app/constants';
 
 const Page = () => {
     const router = useRouter();
@@ -14,7 +15,7 @@ const Page = () => {
     const [votingStatus, setVotingStatus] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
-    const contractAddress = '0xc21cfd0c6c1Be129851Df046944BbedA575D731A';
+    const contractAddress = CON_ADDRESS;
     const contractAbi = abi.abi;
 
     // Connect to Metamask and check if the account is an admin

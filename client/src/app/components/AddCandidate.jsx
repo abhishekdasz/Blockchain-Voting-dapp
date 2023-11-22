@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ethers } from "ethers";
 import abi from '../contract/Voting.json'
+import CON_ADDRESS from '../constants';
 
 const AddCandidate = () => {
     if (!window.ethereum) {
@@ -15,7 +16,7 @@ const AddCandidate = () => {
       const [candidateAddress, setCandidateAddress] = useState("");
       const [candidates, setCandidates] = useState([]);
     
-      const contractAddress = '0xc21cfd0c6c1Be129851Df046944BbedA575D731A';
+      const contractAddress = CON_ADDRESS;
       const contractAbi = abi.abi;
 
       const addNewCandidate = async () => {
