@@ -1,0 +1,42 @@
+/* AdminNavbar.css */
+
+.adminNavbar-section 
+{
+    height: 100%; 
+}
+.adminNavbar-container {
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    background-color: #333; /* Sidebar background color */
+    color: #fff; /* Text color */
+}
+
+.adminNavbar-container a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 16px; /* Add some spacing between links */
+    cursor: pointer;
+    padding: 16px;
+}
+
+.adminNavbar-container a:hover {
+    color: #ff8c00; /* Change text color on hover */
+}
+
+.adminNavbar-container div {
+    cursor: pointer;
+    margin-top: auto; /* Push the Logout link to the bottom */
+    padding: 16px;
+}
+
+.adminNavbar-container div:hover {
+    color: #ff8c00; /* Change text color on hover */
+}
+
+/* Optional: Add some styling for the active link */
+.active {
+    font-weight: bold;
+    color: #ff8c00;
+}

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import abi from "../../../contract/Voting.json";
 import CON_ADDRESS from "../../../constants";
+import AdminNavbar from "@/app/components/AdminNavbar";
 // import "./AdminDashboard.css";
 
 const AllCandidatesInfo = () => {
@@ -61,21 +62,27 @@ const AllCandidatesInfo = () => {
   }, []); // Run this effect only once when the component mounts
 
   return (
-    <div className="admin-dashboard-section">
-      <div className="candidate-information">
-        <div>
-          <h2>All Candidates</h2>
-          <ul>
-            {candidates.map((candidate, index) => (
-              <li key={index}>
-                Name: {candidate.name}, Age: {candidate.age}, Party:{" "}
-                {candidate.party}, Address: {candidate.candidateAddress}, Votes:{" "}
-                {candidate.voteCount}
-              </li>
-            ))}
-          </ul>
+    <div className="allCandidatesInfo-section">
+        <div className="navbar">
+            <AdminNavbar/>
         </div>
-      </div>
+
+        <div className="right-side">
+        <div className="allCandidatesInfo">
+          <h2>All Candidates</h2>
+          <div className="candidates">
+            {candidates.map((candidate, index) => (
+              <div className="candidates-info" key={index}>
+                <p> Name: {candidate.name} </p>
+                <p> Age: {candidate.age} </p>
+                <p> Party:{" "} {candidate.party} </p>
+                <p> Address: {candidate.candidateAddress} </p>
+                <p> Votes: {" "} {candidate.voteCount} </p>            
+              </div>
+            ))}
+          </div>
+        </div>
+        </div>
     </div>
   );
 };

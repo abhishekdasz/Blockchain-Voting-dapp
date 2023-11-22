@@ -1,8 +1,9 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import abi from "../../../contract/Voting.json";
 import CON_ADDRESS from "../../../constants";
+import AdminNavbar from "@/app/components/AdminNavbar";
 
 const page = () => {
   if (!window.ethereum) {
@@ -61,11 +62,14 @@ const page = () => {
     }
   };
 
-
   return (
-    <div className="admin-dashboard-section">
-      <div className="admin-dashboard-container">
-        <div className="AddCandidate-section">
+    <div className="addNewCandidate-section">
+      <div className="navbar">
+        <AdminNavbar />
+      </div>
+
+      <div className="right-side">
+        <div className="AddCandidate-container">
           <div className="heading">
             <h1> Add Candidate Information </h1>
           </div>

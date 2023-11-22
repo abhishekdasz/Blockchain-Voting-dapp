@@ -5,7 +5,7 @@ import abi from '../../contract/Voting.json';
 import AdminLogin from '@/app/components/AdminLogin';
 import { useRouter } from 'next/navigation';
 import CON_ADDRESS from '@/app/constants';
-import AdminDashboard from './AdminDashboard.js/page';
+import AdminDashboard from '@/app/components/AdminDashboard';
 
 
 const Page = () => {
@@ -42,6 +42,10 @@ const Page = () => {
                 if (!adminStatus) {
                     alert("You are not logged in as an admin. Please log in with your admin account");
                 }
+            else {
+                // Redirect to admin/dashboard after successful login
+                router.push('/admin/adminDash');
+            }
 
             } catch (error) {
                 console.log(error);
@@ -50,6 +54,7 @@ const Page = () => {
     };
 
     useEffect(() => {
+        connectContract();
         getCurrentStatus();
         if (window.ethereum) {
             window.ethereum.on('accountsChanged', handleAccountsChanged);
@@ -91,7 +96,7 @@ const Page = () => {
     return (
         <div>
             Admin
-            <div className="login-admin">
+            {/* <div className="login-admin">
             {isConnected && isAdmin ? ( // Only render AddCandidate if isConnected and isAdmin
                 <AdminDashboard account={account} provider={provider} />
             ) : (
@@ -100,7 +105,7 @@ const Page = () => {
             </div>
             <div className="logout">
               <button onClick={handleAdminLogout}> Logout </button>
-            </div>
+            </div> */}
         </div>
     );
 };

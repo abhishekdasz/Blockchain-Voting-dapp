@@ -14,8 +14,7 @@ const AdminDashboard = () => {
       <div className="admin-dashboard-container">
         Admin Dashboard
         <button onClick={handleAllCandidates}> All Candidates </button>
-
-        {/* Render the current component */}
+        
         {currentComponent}
       </div>
     </div>

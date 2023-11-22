@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import abi from "../../../contract/Voting.json";
 import CON_ADDRESS from "../../../constants";
+import AdminNavbar from "@/app/components/AdminNavbar";
 
 const page = () => {
   if (!window.ethereum) {
@@ -178,8 +179,13 @@ const page = () => {
   }, [votingStatus]); // Run this effect whenever votingStatus changes
 
   return (
-    <div className="admin-dashboard-section">
-      <div className="voting-state">
+    <div className="votingState-sec">
+      <div className="navbar">
+        <AdminNavbar/>
+      </div>
+      
+      <div className="right-side">
+        <div className="votingState"> 
         <div className="startEndVoting">
           {votingStatus ? (
             <div>
@@ -187,7 +193,7 @@ const page = () => {
             </div>
           ) : (
             <div>
-              <p> Voting has not started yet. Please the the Voting !!! </p>
+              <p> Voting has not started yet. Please start the Voting !!! </p>
               <label>Voting Duration (minutes): </label>
               <input
                 type="number"
@@ -201,9 +207,8 @@ const page = () => {
             <button onClick={declareResult}>Declare Result</button>
           )}
         </div>
-      </div> 
 
-      <div className="candidate-information">
+        <div className="candidate-information">
         <div>
           <h2>All Candidates</h2>
           <ul>
@@ -216,7 +221,9 @@ const page = () => {
             ))}
           </ul>
         </div>
+        </div>
       </div>
+      </div> 
     </div>
   );
 };
