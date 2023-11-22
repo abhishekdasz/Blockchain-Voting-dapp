@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { ethers } from "ethers";
 import abi from '../../contract/Voting.json';
 import AdminLogin from '@/app/components/AdminLogin';
-import AddCandidate from '@/app/components/AddCandidate';
 import { useRouter } from 'next/navigation';
 import CON_ADDRESS from '@/app/constants';
+import AdminDashboard from './AdminDashboard.js/page';
+
 
 const Page = () => {
     const router = useRouter();
@@ -92,7 +93,7 @@ const Page = () => {
             Admin
             <div className="login-admin">
             {isConnected && isAdmin ? ( // Only render AddCandidate if isConnected and isAdmin
-                <AddCandidate account={account} provider={provider} />
+                <AdminDashboard account={account} provider={provider} />
             ) : (
                 <AdminLogin connectWallet={connectContract} />
             )}
