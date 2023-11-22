@@ -8,6 +8,7 @@ contract Voting {
         string name;
         uint256 age;
         string candidateAddress;
+        string party;
         uint256 voteCount;
     }
 
@@ -21,7 +22,7 @@ contract Voting {
     mapping(address => bool) public hasRegistered;
 
     Candidate[] public candidates;
-    address[] public votersByIndex; // Add this array to store registered voter addresses
+    address[] public votersByIndex;
     uint256 public votingStart;
     uint256 public votingEnd;
 
@@ -51,8 +52,40 @@ contract Voting {
         require(_durationInMinutes > 0, "Voting duration must be greater than zero");
 
         admin = _admin;
+        votingStart = 0;
+        votingEnd = 0;
+    }
+
+    function startVoting(uint256 _durationInMinutes) public onlyAdmin {
+        require(block.timestamp >= votingEnd, "Voting from the previous period has not ended yet");
+
         votingStart = block.timestamp;
-        votingEnd = block.timestamp + (_durationInMinutes * 1 minutes);
+        require(votingStart > 0, "Voting has not started yet");
+        require(_durationInMinutes > 0, "Voting duration must be greater than zero");
+
+        votingEnd = votingStart + (_durationInMinutes * 1 minutes);
+    }
+    function resetVotingEnd() internal {
+        votingEnd = 0;
+    }
+
+    function endVoting() public onlyAdmin {
+        require(votingStart > 0, "Voting has not started yet");
+        require(block.timestamp < votingEnd, "Voting has already ended");
+
+        // Call the internal function to reset votingEnd
+        resetVotingEnd();
+    }
+
+
+    function declareResult() public onlyAdmin {
+        // End the voting
+        endVoting();
+
+        // Retrieve and return total votes for each candidate
+        for (uint256 i = 0; i < candidates.length; i++) {
+            
+        }
     }
 
     function registerVoter(string memory _name, uint256 _age) public {
@@ -65,22 +98,19 @@ contract Voting {
         });
 
         hasRegistered[msg.sender] = true;
-        votersByIndex.push(msg.sender); // Add the voter's address to the array
+        votersByIndex.push(msg.sender);
 
         totalVoters++;
     }
 
-    function addCandidate(string memory _name, uint256 _age, string memory _candidateAddress) public onlyAdmin {
+    function addCandidate(string memory _name, uint256 _age, string memory _party, string memory _candidateAddress) public onlyAdmin {
         candidates.push(Candidate({
             name: _name,
             age: _age,
+            party: _party,
             candidateAddress: _candidateAddress,
             voteCount: 0
         }));
-    }
-
-    function setVotingDuration(uint256 _durationInMinutes) public onlyAdmin {
-        votingEnd = block.timestamp + (_durationInMinutes * 1 minutes);
     }
 
     function vote(uint256 _candidateIndex) public onlyVoter onlyDuringVotingPeriod hasNotVoted {
@@ -109,12 +139,21 @@ contract Voting {
         return candidates.length;
     }
 
+    function getCandidateWithVotes(uint256 _index) public view returns (string memory, uint256, string memory, string memory, uint256) {
+        require(_index < candidates.length, "Invalid candidate index");
+
+        Candidate storage candidate = candidates[_index];
+        return (candidate.name, candidate.age, candidate.party, candidate.candidateAddress, candidate.voteCount);
+    }
+
     function getVotingStatus() public view returns (bool) {
         return isVotingOpen();
     }
 
     function getRemainingTime() public view returns (uint256) {
-        require(block.timestamp >= votingStart, "Voting has not started yet");
+        if (votingStart == 0) {
+            return 0;
+        }
 
         if (block.timestamp >= votingEnd) {
             return 0;
@@ -139,4 +178,3 @@ contract Voting {
         return msg.sender == admin;
     }
 }
-
