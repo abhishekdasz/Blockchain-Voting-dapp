@@ -28,6 +28,7 @@ contract Voting {
     uint256 public votingEnd;
 
     uint256 public totalVoters;
+    string public winnerName;
 
     modifier onlyAdmin {
         require(msg.sender == admin, "Only the admin can call this function");
@@ -85,15 +86,19 @@ contract Voting {
         resetVotingEnd();
     }
 
-    function declareResult() public onlyAdmin votingEnded returns (string memory, Candidate[] memory) {
-        (string memory winnerName, ) = getWinner();
-        // Emit the event to log the winner's name
-        emit WinnerDeclared(winnerName);
-        return (winnerName, candidates);
+    function declareResult() public onlyAdmin votingEnded {
+        // Call the internal function to reset votingEnd
+        resetVotingEnd();
+
+        // Set the winner details
+        (winnerName, ) = getWinner();
+
+        // Emit the event to log the winner's name and votes for all candidates
+        emit WinnerDeclared(winnerName, candidates);
     }
 
     // Event to log the winner's name
-    event WinnerDeclared(string winnerName);
+    event WinnerDeclared(string winnerName, Candidate[] candidates);
 
     function getWinner() public view returns (string memory, Candidate[] memory) {
         // Initialize variables to keep track of the winning candidate and their votes

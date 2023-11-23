@@ -25,6 +25,7 @@ const Page = () => {
   const [votingStatus, setVotingStatus] = useState(true); // Assume voting is in progress
   const [isVotingStarted, setIsVotingStarted] = useState(true); // Assume voting is in progress
   const [winner, setWinner] = useState("");
+  const [winnerDetails, setWinnerDetails] = useState([]);
 
   // Contract details
   const contractAddress = CON_ADDRESS;
@@ -165,6 +166,7 @@ useEffect(() => {
       contract.on("WinnerDeclared", (winnerName, candidates) => {
         console.log("Winner Declared:", winnerName);
         setWinner(winnerName);
+        setWinnerDetails(candidates);
         // You can also update the candidates state if needed
       });
 
@@ -178,7 +180,7 @@ useEffect(() => {
   };
 
   fetchWinner();
-}, [contractAddress, contractAbi, provider]);
+}, []);
 
   // Render JSX
   return (
@@ -246,13 +248,29 @@ useEffect(() => {
             </div>
           </div> */}
 
-          {/* Display the winner */}
-          {winner && (
-            <div className="winner-section">
-              <h2>Winner</h2>
-              <p>{winner}</p>
-            </div>
-          )}
+<br />  <h1>Results:</h1> 
+{winner && (
+  <div className="winner-section">
+    <h3>Congratulations, Winner is: {winner}</h3>
+
+    <br />
+    <div>
+      <h2> Vote Stats: </h2>
+    {winnerDetails.map((details, index) => (
+  <div key={index}>
+    <p>Name: {details[0]}</p>
+    <p>Age: {details[1].toString()}</p>
+    {/* <p>Address: {details[2]}</p> */}
+    <p>Party: {details[3]}</p>
+    <p>Votes: {details[4].toString()}</p>
+    <br />
+  </div>
+))}
+
+    </div>
+  </div>
+)}
+
         </div>
       </div>
     </div>

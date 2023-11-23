@@ -1,5 +1,5 @@
 // Import necessary libraries and components
-'use client';
+'use client'
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import abi from '../../../contract/Voting.json';
@@ -12,6 +12,7 @@ const Page = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [votingStatus, setVotingStatus] = useState(false);
   const [winner, setWinner] = useState(null);
+  const [candidates, setCandidates] = useState([]);
 
   const contractAddress = CON_ADDRESS;
   const contractAbi = abi.abi;
@@ -81,7 +82,8 @@ const Page = () => {
       const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
       const result = await contractInstance.getWinner();
       console.log('Winner Details:', result);
-      setWinner(result[0]);
+      setWinner(result.winnerName);
+      setCandidates(result.candidates);
     } catch (error) {
       console.error('Error fetching winner details:', error);
     }
@@ -106,6 +108,16 @@ const Page = () => {
             <div>
               <h2>Winner</h2>
               <p>{winner}</p>
+              <h3>All Candidates</h3>
+              <ul>
+                {candidates.map((candidate, index) => (
+                  <li key={index}>
+                    <p>Name: {candidate.name}</p>
+                    <p>Party: {candidate.party}</p>
+                    {/* Add other candidate details as needed */}
+                  </li>
+                ))}
+              </ul>
             </div>
           ) : (
             <p>No winner declared yet.</p>
