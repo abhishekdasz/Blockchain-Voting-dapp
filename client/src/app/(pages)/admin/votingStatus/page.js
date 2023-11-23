@@ -24,6 +24,7 @@ const Page = () => {
   const [candidates, setCandidates] = useState([]);
   const [votingStatus, setVotingStatus] = useState(true); // Assume voting is in progress
   const [isVotingStarted, setIsVotingStarted] = useState(true); // Assume voting is in progress
+  const [winner, setWinner] = useState("");
 
   // Contract details
   const contractAddress = CON_ADDRESS;
@@ -81,8 +82,13 @@ const Page = () => {
       // After declaring the result, fetch and display all candidates with votes
       getAllCandidatesWithVotes();
 
-      // Update the voting status after calling declareResult
-      updateVotingStatus();
+      // Fetch the winning candidate's name
+      const winnerIndex = await contract.getWinnerIndex();
+      const winner = await contract.getCandidateWithVotes(winnerIndex);
+
+      // Update the component state with the fetched candidates and winner
+      setCandidates(formattedCandidates);
+      setWinner(winner[0]);
     } catch (error) {
       console.error("Error declaring result:", error);
     }
@@ -249,6 +255,14 @@ const Page = () => {
               </div>
             </div>
           </div>
+
+          {/* Display the winner */}
+          {winner && (
+            <div className="winner-section">
+              <h2>Winner</h2>
+              <p>{winner}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

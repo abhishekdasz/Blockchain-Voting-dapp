@@ -27,6 +27,7 @@ contract Voting {
     uint256 public votingEnd;
 
     uint256 public totalVoters;
+    bool public resultDeclared;
 
     modifier onlyAdmin {
         require(msg.sender == admin, "Only the admin can call this function");
@@ -48,15 +49,21 @@ contract Voting {
         _;
     }
 
+    modifier resultNotDeclared {
+        require(!resultDeclared, "Result has already been declared");
+        _;
+    }
+
     constructor(uint256 _durationInMinutes, address _admin) {
         require(_durationInMinutes > 0, "Voting duration must be greater than zero");
 
         admin = _admin;
         votingStart = 0;
         votingEnd = 0;
+        resultDeclared = false;
     }
 
-    function startVoting(uint256 _durationInMinutes) public onlyAdmin {
+    function startVoting(uint256 _durationInMinutes) public onlyAdmin resultNotDeclared {
         require(block.timestamp >= votingEnd, "Voting from the previous period has not ended yet");
 
         votingStart = block.timestamp;
@@ -65,11 +72,12 @@ contract Voting {
 
         votingEnd = votingStart + (_durationInMinutes * 1 minutes);
     }
+
     function resetVotingEnd() internal {
         votingEnd = 0;
     }
 
-    function endVoting() public onlyAdmin {
+    function endVoting() public onlyAdmin resultNotDeclared {
         require(votingStart > 0, "Voting has not started yet");
         require(block.timestamp < votingEnd, "Voting has already ended");
 
@@ -77,31 +85,31 @@ contract Voting {
         resetVotingEnd();
     }
 
+    function declareResult() public onlyAdmin resultNotDeclared {
+        // End the voting
+        endVoting();
 
-function declareResult() public onlyAdmin {
-    // End the voting
-    endVoting();
+        // Initialize variables to keep track of the winning candidate and their votes
+        uint256 winningVoteCount = 0;
+        string memory winningCandidateName;
 
-    // Initialize variables to keep track of the winning candidate and their votes
-    uint256 winningVoteCount = 0;
-    string memory winningCandidateName;
-
-    // Iterate through all candidates to find the winner
-    for (uint256 i = 0; i < candidates.length; i++) {
-        if (candidates[i].voteCount > winningVoteCount) {
-            winningVoteCount = candidates[i].voteCount;
-            winningCandidateName = candidates[i].name;
+        // Iterate through all candidates to find the winner
+        for (uint256 i = 0; i < candidates.length; i++) {
+            if (candidates[i].voteCount > winningVoteCount) {
+                winningVoteCount = candidates[i].voteCount;
+                winningCandidateName = candidates[i].name;
+            }
         }
+
+        // Emit an event to log the winner's name
+        emit WinnerDeclared(winningCandidateName);
+
+        // Set the result declared flag to true
+        resultDeclared = true;
     }
 
-    // You can use the 'winningCandidateName' variable as needed, for example, logging or returning it
-    // For simplicity, let's assume you want to log the winner's name
-    emit WinnerDeclared(winningCandidateName);
-}
-
-// Event to log the winner's name
-event WinnerDeclared(string winnerName);
-
+    // Event to log the winner's name
+    event WinnerDeclared(string winnerName);
 
     function registerVoter(string memory _name, uint256 _age) public {
         require(!hasRegistered[msg.sender], "Voter is already registered");
@@ -139,17 +147,6 @@ event WinnerDeclared(string winnerName);
         return candidates;
     }
 
-    function getAllVoters() public view returns (Voter[] memory) {
-        Voter[] memory allVoters = new Voter[](totalVoters);
-
-        for (uint256 i = 0; i < totalVoters; i++) {
-            address voterAddress = votersByIndex[i];
-            allVoters[i] = voters[voterAddress];
-        }
-
-        return allVoters;
-    }
-
     function getCandidateCount() public view returns (uint256) {
         return candidates.length;
     }
@@ -159,22 +156,6 @@ event WinnerDeclared(string winnerName);
 
         Candidate storage candidate = candidates[_index];
         return (candidate.name, candidate.age, candidate.party, candidate.candidateAddress, candidate.voteCount);
-    }
-
-    function getVotingStatus() public view returns (bool) {
-        return isVotingOpen();
-    }
-
-    function getRemainingTime() public view returns (uint256) {
-        if (votingStart == 0) {
-            return 0;
-        }
-
-        if (block.timestamp >= votingEnd) {
-            return 0;
-        }
-
-        return votingEnd - block.timestamp;
     }
 
     function isVotingOpen() public view returns (bool) {

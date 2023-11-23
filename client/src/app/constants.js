@@ -4,7 +4,7 @@ import img3 from '../assets/Suresh_Kumar_Routray.png'
 
 const candidateImages = [img1, img2, img3];
 
-const CON_ADDRESS = '0xB005EA7375F557851421f918618423190f3AE4A7';
+const CON_ADDRESS = '0xB4Bc8bf92f89a61A724bE36bFb4d28bD7867226e';
 
 export {candidateImages};
 export default CON_ADDRESS;
