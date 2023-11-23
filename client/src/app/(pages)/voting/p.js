@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { ethers } from "ethers";
-import abi from '../../contract/Voting.json'
+import abi from '../../../contract/Voting.json'
 import LoginVoter from '@/app/components/LoginVoter'
 import VoterReg from '@/app/components/VoterReg'
 import { useRouter } from 'next/navigation';
@@ -29,15 +29,6 @@ const page = () => {
           setAccount(address);
           console.log("Metamask connected" + address);
           setIsConnected(true);
-
-          if(!isConnected)
-          {
-            alert("You are not logged in to the Metamask. Please log in with your Metamask");
-          }
-          else 
-          {
-            router.push('/voter/voterDashboard');
-          }
         } catch (error) {
           console.log(error);
         }
@@ -45,7 +36,6 @@ const page = () => {
     }; 
 
     useEffect( () => {
-      connectContract();
       getCurrentStatus();
       if (window.ethereum) {
         window.ethereum.on('accountsChanged', handleAccountsChanged);
@@ -85,7 +75,16 @@ const page = () => {
 
   return (
     <div>
-      Voter
+      <div className="reg-voter">
+      {isConnected ? (
+        <VoterReg account={account} provider={provider} />
+      ) : (
+        <LoginVoter connectWallet={connectContract} />
+      )}
+      </div>
+      <div className="logout">
+        <button onClick={handleVoterLogout}> Logout </button>
+      </div>
     </div>
   )
 }

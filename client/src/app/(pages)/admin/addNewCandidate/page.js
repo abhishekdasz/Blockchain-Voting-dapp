@@ -30,6 +30,7 @@ const page = () => {
   const addNewCandidate = async () => {
     try {
       if (!name || !age || !candidateAddress) {
+        alert('Please fill in all the fields');
         console.error("Please fill in all the fields");
         return;
       }
@@ -54,9 +55,12 @@ const page = () => {
       await transaction.wait();
 
       console.log("Candidate added successfully");
+      alert('Candidate added successfully');
+      setName("");
+      setAge("");
+      setParty("");
+      setCandidateAddress("");
 
-      // After adding a candidate, fetch and display all candidates
-      getAllCandidates();
     } catch (error) {
       console.error("Error adding candidate:", error);
     }

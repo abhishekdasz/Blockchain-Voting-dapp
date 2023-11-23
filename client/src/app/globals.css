@@ -66,6 +66,18 @@
     display: flex;
     height: 100vh;
 }
+.admin-dashboard-contents
+{
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    width: 600px;
+    align-items: center;
+}
 
 
 /* AddCandidate.css */
@@ -93,7 +105,16 @@
     flex: 1;
     margin-left: 20px;
 }
-
+.AddCandidate-container
+{
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    width: 600px;
+    align-items: center;
+}
 .heading {
     margin-bottom: 20px;
 }
@@ -165,6 +186,8 @@ button:hover {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px;
+    width: 600px;
+    align-items: center;
 }
 
 .right-side h2 {
@@ -174,11 +197,20 @@ button:hover {
 
 
 .candidates-info {
+    display: flex;
     margin-bottom: 15px;
     background-color: #fff;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    width: 320px;
+}
+.info 
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Responsive design for smaller screens */
@@ -206,3 +238,136 @@ button:hover {
     display: flex;
     height: 100vh;
 }
+.votingState
+{
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    width: 600px;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+/* voter navbar starts here */
+.voter-navbar 
+{
+    flex: 1;
+}
+/* voter navbar ends here */
+/* voter dashboard starts here */
+.voter-dashboard-section
+{
+    display: flex;
+    height: 100vh;
+}
+.voter-dashboard-container
+{
+    display: flex;
+    flex: 7;
+    justify-content: center;
+}
+.voter-dashboard
+{
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    width: 600px;
+    align-items: center;
+}
+/* voter dashboard ends here */
+
+/* register Voter starts here*/
+.registerVoter-section
+{
+    display: flex;
+    height: 100vh;
+}
+.registerVoter-container
+{
+    display: flex;
+    flex: 7;
+    justify-content: center;
+}
+.registerVoter-card
+{
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    width: 600px;
+    align-items: center;
+}
+.registerVoter-inputs
+{
+    width: 100%;
+}
+/* register Voter ends here*/
+
+/* voting section starts here*/
+.voting-section
+{
+    display: flex;
+    height: 100vh;
+}
+.voting-container
+{
+    display: flex;
+    flex: 7;
+    justify-content: center;
+}
+.voting-card
+{
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    width: 600px;
+    align-items: center;
+}
+/* voting section ends here*/
+
+/* vote results section starts here */
+.result-section
+{
+    display: flex;
+    height: 100vh;
+}
+.result-container
+{
+    flex: 7;
+    display: flex;
+    justify-content: center;
+}
+.result-card
+{
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    width: 600px;
+    align-items: center;
+}
+/* vote results section ends here */

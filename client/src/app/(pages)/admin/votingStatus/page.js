@@ -1,9 +1,10 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import abi from "../../../contract/Voting.json";
-import CON_ADDRESS from "../../../constants";
+import CON_ADDRESS, { candidateImages } from "../../../constants";
 import AdminNavbar from "@/app/components/AdminNavbar";
+import Image from "next/image";
 
 const page = () => {
   if (!window.ethereum) {
@@ -27,7 +28,6 @@ const page = () => {
   const contractAddress = CON_ADDRESS;
   const contractAbi = abi.abi;
 
-  
   const startOrEndVoting = async () => {
     try {
       // Connect to the Ethereum provider
@@ -181,49 +181,68 @@ const page = () => {
   return (
     <div className="votingState-sec">
       <div className="navbar">
-        <AdminNavbar/>
+        <AdminNavbar />
       </div>
-      
-      <div className="right-side">
-        <div className="votingState"> 
-        <div className="startEndVoting">
-          {votingStatus ? (
-            <div>
-              <button onClick={startOrEndVoting}>End Voting</button>
-            </div>
-          ) : (
-            <div>
-              <p> Voting has not started yet. Please start the Voting !!! </p>
-              <label>Voting Duration (minutes): </label>
-              <input
-                type="number"
-                value={votingDuration}
-                onChange={(e) => setVotingDuration(e.target.value)}
-              />
-              <button onClick={startOrEndVoting}>Start Voting</button>
-            </div>
-          )}
-          {isVotingStarted && (
-            <button onClick={declareResult}>Declare Result</button>
-          )}
-        </div>
 
-        <div className="candidate-information">
-        <div>
-          <h2>All Candidates</h2>
-          <ul>
-            {candidates.map((candidate, index) => (
-              <li key={index}>
-                Name: {candidate.name}, Age: {candidate.age}, Party:{" "}
-                {candidate.party}, Address: {candidate.candidateAddress}, Votes:{" "}
-                {candidate.voteCount}
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="right-side">
+        <div className="votingState">
+          <div className="startEndVoting">
+            {votingStatus ? (
+              <div>
+                <button onClick={startOrEndVoting}>End Voting</button>
+              </div>
+            ) : (
+              <div>
+                <p> Voting has not started yet. <br /> Please start the Voting !!! </p>
+                <label>Voting Duration (minutes): </label>
+                <input
+                  type="number"
+                  value={votingDuration}
+                  onChange={(e) => setVotingDuration(e.target.value)}
+                />
+                <button onClick={startOrEndVoting}>Start Voting</button>
+              </div>
+            )}
+            {isVotingStarted && (
+              <button onClick={declareResult}>Declare Result</button>
+            )}
+          </div>
+
+          <div className="candidates-information">
+            <div>
+              <h2>All Candidates</h2>
+              <div className="candidates">
+                {candidates.map((candidate, index) => (
+                  <div className="candidates-info" key={index}>
+                    <div className="info">
+                      <p> Name: {candidate.name} </p>
+                      <p> Age: {candidate.age} </p>
+                      <p> Party: {candidate.party} </p>
+                      <p>
+                        {" "}
+                        Address:{" "}
+                        {`${candidate.candidateAddress.slice(
+                          0,
+                          5
+                        )}....${candidate.candidateAddress.slice(-5)}`}{" "}
+                      </p>
+                      <p> Votes: {candidate.voteCount} </p>
+                    </div>
+                    <div className="candidate-img">
+                      <Image
+                        src={candidateImages[index % candidateImages.length]}
+                        alt="Candidate Image"
+                        width={100}
+                        height={100}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      </div> 
     </div>
   );
 };

@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import abi from "../../../contract/Voting.json";
-import CON_ADDRESS from "../../../constants";
+import CON_ADDRESS, { candidateImages } from "../../../constants";
 import AdminNavbar from "@/app/components/AdminNavbar";
+import Image from "next/image";
 // import "./AdminDashboard.css";
+
 
 const AllCandidatesInfo = () => {
   if (!window.ethereum) {
@@ -73,11 +75,16 @@ const AllCandidatesInfo = () => {
           <div className="candidates">
             {candidates.map((candidate, index) => (
               <div className="candidates-info" key={index}>
-                <p> Name: {candidate.name} </p>
-                <p> Age: {candidate.age} </p>
-                <p> Party:{" "} {candidate.party} </p>
-                <p> Address: {`${candidate.candidateAddress.slice(0, 5)}....${candidate.candidateAddress.slice(-5)}`} </p>
-                {/* <p> Votes: {" "} {candidate.voteCount} </p>             */}
+                <div className="info">
+                  <p> Name: {candidate.name} </p>
+                  <p> Age: {candidate.age} </p>
+                  <p> Party:{" "} {candidate.party} </p>
+                  <p> Address: {`${candidate.candidateAddress.slice(0, 5)}....${candidate.candidateAddress.slice(-5)}`} </p>
+                  {/* <p> Votes: {" "} {candidate.voteCount} </p>             */}
+                </div>
+                <div className="candidate-img">
+                  <Image src={candidateImages[index % candidateImages.length]} alt="Candidate Image" width={100} height={100} />
+                </div>
               </div>
             ))}
           </div>

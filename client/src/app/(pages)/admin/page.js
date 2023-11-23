@@ -42,10 +42,11 @@ const Page = () => {
                 if (!adminStatus) {
                     alert("You are not logged in as an admin. Please log in with your admin account");
                 }
-            else {
-                // Redirect to admin/dashboard after successful login
-                router.push('/admin/adminDash');
-            }
+                else 
+                {
+                    // Redirect to admin/dashboard after successful login
+                    router.push('/admin/adminDash');
+                }
 
             } catch (error) {
                 console.log(error);
