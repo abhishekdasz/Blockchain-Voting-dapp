@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 contract Voting {
     address public admin;
+    bool public votingOpen;
 
     struct Candidate {
         string name;
@@ -27,7 +28,6 @@ contract Voting {
     uint256 public votingEnd;
 
     uint256 public totalVoters;
-    bool public resultDeclared;
 
     modifier onlyAdmin {
         require(msg.sender == admin, "Only the admin can call this function");
@@ -49,8 +49,8 @@ contract Voting {
         _;
     }
 
-    modifier resultNotDeclared {
-        require(!resultDeclared, "Result has already been declared");
+    modifier votingEnded {
+        require(block.timestamp >= votingEnd, "Voting has not ended yet");
         _;
     }
 
@@ -60,10 +60,11 @@ contract Voting {
         admin = _admin;
         votingStart = 0;
         votingEnd = 0;
-        resultDeclared = false;
+        votingOpen = false;
     }
 
-    function startVoting(uint256 _durationInMinutes) public onlyAdmin resultNotDeclared {
+    function startVoting(uint256 _durationInMinutes) public onlyAdmin {
+        require(!votingOpen, "Voting is already open");
         require(block.timestamp >= votingEnd, "Voting from the previous period has not ended yet");
 
         votingStart = block.timestamp;
@@ -71,24 +72,29 @@ contract Voting {
         require(_durationInMinutes > 0, "Voting duration must be greater than zero");
 
         votingEnd = votingStart + (_durationInMinutes * 1 minutes);
+        votingOpen = true;
     }
 
     function resetVotingEnd() internal {
         votingEnd = 0;
+        votingOpen = false;
     }
 
-    function endVoting() public onlyAdmin resultNotDeclared {
-        require(votingStart > 0, "Voting has not started yet");
-        require(block.timestamp < votingEnd, "Voting has already ended");
-
+    function endVoting() public onlyAdmin onlyDuringVotingPeriod {
         // Call the internal function to reset votingEnd
         resetVotingEnd();
     }
 
-    function declareResult() public onlyAdmin resultNotDeclared {
-        // End the voting
-        endVoting();
+    function declareResult() public onlyAdmin votingEnded {
+        (string memory winnerName, Candidate[] memory allCandidates) = getWinner();
+        // Emit the event to log the winner's name and votes for all candidates
+        emit WinnerDeclared(winnerName, allCandidates); 
+    }
 
+    // Event to log the winner's name and votes for all candidates
+    event WinnerDeclared(string winnerName, Candidate[] candidates);
+
+    function getWinner() public view returns (string memory, Candidate[] memory) {
         // Initialize variables to keep track of the winning candidate and their votes
         uint256 winningVoteCount = 0;
         string memory winningCandidateName;
@@ -101,15 +107,9 @@ contract Voting {
             }
         }
 
-        // Emit an event to log the winner's name
-        emit WinnerDeclared(winningCandidateName);
-
-        // Set the result declared flag to true
-        resultDeclared = true;
+        // Return the winner's name and votes for all candidates
+        return (winningCandidateName, candidates);
     }
-
-    // Event to log the winner's name
-    event WinnerDeclared(string winnerName);
 
     function registerVoter(string memory _name, uint256 _age) public {
         require(!hasRegistered[msg.sender], "Voter is already registered");
@@ -147,19 +147,39 @@ contract Voting {
         return candidates;
     }
 
+    function getAllVoters() public view returns (Voter[] memory) {
+        Voter[] memory allVoters = new Voter[](totalVoters);
+
+        for (uint256 i = 0; i < totalVoters; i++) {
+            address voterAddress = votersByIndex[i];
+            allVoters[i] = voters[voterAddress];
+        }
+
+        return allVoters;
+    }
+
     function getCandidateCount() public view returns (uint256) {
         return candidates.length;
     }
 
-    function getCandidateWithVotes(uint256 _index) public view returns (string memory, uint256, string memory, string memory, uint256) {
-        require(_index < candidates.length, "Invalid candidate index");
+    function getVotingStatus() public view returns (bool) {
+        return isVotingOpen();
+    }
 
-        Candidate storage candidate = candidates[_index];
-        return (candidate.name, candidate.age, candidate.party, candidate.candidateAddress, candidate.voteCount);
+    function getRemainingTime() public view returns (uint256) {
+        if (votingStart == 0) {
+            return 0;
+        }
+
+        if (block.timestamp >= votingEnd) {
+            return 0;
+        }
+
+        return votingEnd - block.timestamp;
     }
 
     function isVotingOpen() public view returns (bool) {
-        return block.timestamp >= votingStart && block.timestamp < votingEnd;
+        return votingOpen;
     }
 
     function showTotalVoters() public view returns (uint256) {
