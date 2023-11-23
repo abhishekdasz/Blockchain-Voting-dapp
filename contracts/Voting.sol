@@ -85,10 +85,11 @@ contract Voting {
         resetVotingEnd();
     }
 
-    function declareResult() public onlyAdmin votingEnded {
+    function declareResult() public onlyAdmin votingEnded returns (string memory, Candidate[] memory) {
         (string memory winnerName, Candidate[] memory allCandidates) = getWinner();
         // Emit the event to log the winner's name and votes for all candidates
-        emit WinnerDeclared(winnerName, allCandidates); 
+        emit WinnerDeclared(winnerName, allCandidates);
+        return (winnerName, allCandidates);
     }
 
     // Event to log the winner's name and votes for all candidates
