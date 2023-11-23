@@ -63,28 +63,29 @@ const Page = () => {
   };
 
   // Declare result
-  const declareResult = async () => {
-    try {
-      // Connect to the Ethereum provider
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-  
-      // Call the declareResult function on the smart contract
-      const transaction = await contract.declareResult();
-      await transaction.wait();
-      console.log("Result declared successfully");
-  
-      // Fetch the winning candidate's name and votes
-      const [winnerName, allCandidates] = await contract.getWinner();
-  
-      // Update the component state with the fetched winner and all candidates
-      setWinner(winnerName);
-      // You can also update the candidates state if needed
-      setCandidates(allCandidates);
-    } catch (error) {
-      console.error("Error declaring result:", error);
-    }
-  };
+// Declare result
+const declareResult = async () => {
+  try {
+    // Connect to the Ethereum provider
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      contractAddress,
+      contractAbi,
+      signer
+    );
+
+    // Call the declareResult function on the smart contract
+    const result = await contract.declareResult();
+    console.log("Result declared successfully", result);
+
+    // Update the component state with the fetched winner and candidates
+    setWinner(result[0]);
+    setCandidates(result[1]);
+  } catch (error) {
+    console.error("Error declaring result:", error);
+  }
+};
+
 
   // Fetch all candidates
   const getAllCandidates = async () => {
@@ -149,33 +150,35 @@ const Page = () => {
   }, []);
 
   // Listen for WinnerDeclared event
-  useEffect(() => {
-    const fetchWinner = async () => {
-      try {
-        // Connect to the Ethereum provider
-        const contract = new ethers.Contract(
-          contractAddress,
-          contractAbi,
-          provider
-        );
+// Listen for WinnerDeclared event
+useEffect(() => {
+  const fetchWinner = async () => {
+    try {
+      // Connect to the Ethereum provider
+      const contract = new ethers.Contract(
+        contractAddress,
+        contractAbi,
+        provider
+      );
 
-        // Listen for WinnerDeclared event
-        contract.on("WinnerDeclared", (winnerName, candidates) => {
-          console.log("Winner Declared:", winnerName);
-          setWinner(winnerName);
-          // You can also update the candidates state if needed
-        });
-                // Cleanup the event listener when the component unmounts
-                return () => {
-                  contract.removeAllListeners("WinnerDeclared");
-                };
-      } catch (error) {
-        console.error("Error listening for WinnerDeclared event:", error);
-      }
-    };
+      // Listen for WinnerDeclared event
+      contract.on("WinnerDeclared", (winnerName, candidates) => {
+        console.log("Winner Declared:", winnerName);
+        setWinner(winnerName);
+        // You can also update the candidates state if needed
+      });
 
-    fetchWinner();
-  }, [contractAddress, contractAbi, provider]);
+      // Cleanup the event listener when the component unmounts
+      return () => {
+        contract.removeAllListeners("WinnerDeclared");
+      };
+    } catch (error) {
+      console.error("Error listening for WinnerDeclared event:", error);
+    }
+  };
+
+  fetchWinner();
+}, [contractAddress, contractAbi, provider]);
 
   // Render JSX
   return (
@@ -209,7 +212,7 @@ const Page = () => {
             )}
           </div>
 
-          <div className="candidates-information">
+          {/* <div className="candidates-information">
             <div>
               <h2>All Candidates</h2>
               <div className="candidates">
@@ -241,7 +244,7 @@ const Page = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Display the winner */}
           {winner && (

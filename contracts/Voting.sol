@@ -86,14 +86,14 @@ contract Voting {
     }
 
     function declareResult() public onlyAdmin votingEnded returns (string memory, Candidate[] memory) {
-        (string memory winnerName, Candidate[] memory allCandidates) = getWinner();
-        // Emit the event to log the winner's name and votes for all candidates
-        emit WinnerDeclared(winnerName, allCandidates);
-        return (winnerName, allCandidates);
+        (string memory winnerName, ) = getWinner();
+        // Emit the event to log the winner's name
+        emit WinnerDeclared(winnerName);
+        return (winnerName, candidates);
     }
 
-    // Event to log the winner's name and votes for all candidates
-    event WinnerDeclared(string winnerName, Candidate[] candidates);
+    // Event to log the winner's name
+    event WinnerDeclared(string winnerName);
 
     function getWinner() public view returns (string memory, Candidate[] memory) {
         // Initialize variables to keep track of the winning candidate and their votes
