@@ -76,8 +76,8 @@ const AllCandidatesInfo = () => {
                 <p> Name: {candidate.name} </p>
                 <p> Age: {candidate.age} </p>
                 <p> Party:{" "} {candidate.party} </p>
-                <p> Address: {candidate.candidateAddress} </p>
-                <p> Votes: {" "} {candidate.voteCount} </p>            
+                <p> Address: {`${candidate.candidateAddress.slice(0, 5)}....${candidate.candidateAddress.slice(-5)}`} </p>
+                {/* <p> Votes: {" "} {candidate.voteCount} </p>             */}
               </div>
             ))}
           </div>
