@@ -78,15 +78,30 @@ contract Voting {
     }
 
 
-    function declareResult() public onlyAdmin {
-        // End the voting
-        endVoting();
+function declareResult() public onlyAdmin {
+    // End the voting
+    endVoting();
 
-        // Retrieve and return total votes for each candidate
-        for (uint256 i = 0; i < candidates.length; i++) {
-            
+    // Initialize variables to keep track of the winning candidate and their votes
+    uint256 winningVoteCount = 0;
+    string memory winningCandidateName;
+
+    // Iterate through all candidates to find the winner
+    for (uint256 i = 0; i < candidates.length; i++) {
+        if (candidates[i].voteCount > winningVoteCount) {
+            winningVoteCount = candidates[i].voteCount;
+            winningCandidateName = candidates[i].name;
         }
     }
+
+    // You can use the 'winningCandidateName' variable as needed, for example, logging or returning it
+    // For simplicity, let's assume you want to log the winner's name
+    emit WinnerDeclared(winningCandidateName);
+}
+
+// Event to log the winner's name
+event WinnerDeclared(string winnerName);
+
 
     function registerVoter(string memory _name, uint256 _age) public {
         require(!hasRegistered[msg.sender], "Voter is already registered");

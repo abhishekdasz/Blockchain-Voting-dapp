@@ -41,6 +41,7 @@ const Page = () => {
 
                 if (!adminStatus) {
                     alert("You are not logged in as an admin. Please log in with your admin account");
+                    router.push('/')
                 }
                 else 
                 {

@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 "use client";
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
@@ -6,7 +7,8 @@ import CON_ADDRESS, { candidateImages } from "../../../constants";
 import AdminNavbar from "@/app/components/AdminNavbar";
 import Image from "next/image";
 
-const page = () => {
+const Page = () => {
+  // Check for the Ethereum provider
   if (!window.ethereum) {
     console.error(
       "Ethereum provider not detected. Please make sure MetaMask or another Ethereum provider is installed."
@@ -14,20 +16,20 @@ const page = () => {
     return <div>Ethereum provider not available</div>;
   }
 
+  // Ethereum provider setup
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [party, setParty] = useState("");
-  const [candidateAddress, setCandidateAddress] = useState("");
+  // State variables
   const [votingDuration, setVotingDuration] = useState("");
   const [candidates, setCandidates] = useState([]);
-  const [votingStatus, setVotingStatus] = useState(false);
-  const [isVotingStarted, setIsVotingStarted] = useState(false);
+  const [votingStatus, setVotingStatus] = useState(true); // Assume voting is in progress
+  const [isVotingStarted, setIsVotingStarted] = useState(true); // Assume voting is in progress
 
+  // Contract details
   const contractAddress = CON_ADDRESS;
   const contractAbi = abi.abi;
 
+  // Start or end voting
   const startOrEndVoting = async () => {
     try {
       // Connect to the Ethereum provider
@@ -59,6 +61,7 @@ const page = () => {
     }
   };
 
+  // Declare result
   const declareResult = async () => {
     try {
       // Connect to the Ethereum provider
@@ -85,6 +88,7 @@ const page = () => {
     }
   };
 
+  // Fetch all candidates
   const getAllCandidates = async () => {
     try {
       // Connect to the Ethereum provider
@@ -112,6 +116,7 @@ const page = () => {
     }
   };
 
+  // Fetch all candidates with votes
   const getAllCandidatesWithVotes = async () => {
     try {
       // Connect to the Ethereum provider
@@ -144,6 +149,7 @@ const page = () => {
     }
   };
 
+  // Update voting status
   const updateVotingStatus = async () => {
     try {
       // Connect to the Ethereum provider
@@ -161,23 +167,25 @@ const page = () => {
 
       // Update the component state with whether voting has started
       setIsVotingStarted(status);
+
+      // Fetch candidates with votes after updating the voting status
+      getAllCandidatesWithVotes();
     } catch (error) {
       console.error("Error fetching voting status:", error);
     }
   };
 
+  // Fetch and display candidates when the component mounts
   useEffect(() => {
-    // Fetch and display candidates when the component mounts
     getAllCandidates();
-    // Fetch and display voting status when the component mounts
-    updateVotingStatus();
-  }, []); // Run this effect only once when the component mounts
+  }, []);
 
+  // Fetch and display voting status when the component mounts
   useEffect(() => {
-    // Update the voting status whenever it changes
     updateVotingStatus();
-  }, [votingStatus]); // Run this effect whenever votingStatus changes
+  }, []);
 
+  // Render JSX
   return (
     <div className="votingState-sec">
       <div className="navbar">
@@ -247,4 +255,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
