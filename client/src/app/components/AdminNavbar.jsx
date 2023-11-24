@@ -14,8 +14,8 @@ const AdminNavbar = () => {
       <div className="adminNavbar-container">
         <Link href="/admin/adminDash" className={active}> Admin Dashboard </Link>
         <Link href="/admin/addNewCandidate"> Add New Candidate </Link>
-        <Link href="/admin/AllCandidatesInfo"> All Candidates Info </Link>
-        <Link href="/admin/votingStatus"> Voting Status </Link>
+        <Link href="/admin/AllCandidatesInfo"> Candidates Information </Link>
+        <Link href="/admin/votingStatus"> Voting Control </Link>
         <div className="logout" onClick={handleLogout}> Logout </div>
       </div>
     </div>

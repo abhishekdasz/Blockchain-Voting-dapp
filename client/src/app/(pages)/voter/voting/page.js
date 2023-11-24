@@ -110,7 +110,7 @@ const Page = () => {
                       <p> Age: {candidate.age} </p>
                       <p> Party: {candidate.party} </p>
                       <p> Address:{`${candidate.candidateAddress.slice(0,5)}....${candidate.candidateAddress.slice(-5)}`} </p>
-                      <p> VoteCount: {candidate.voteCount} </p>
+                      {/* <p> VoteCount: {candidate.voteCount} </p> */}
                       <button onClick={() => voteForCandidate(index)}>
                         Votee
                       </button>
