@@ -1,21 +1,70 @@
 "use client";
+// Import necessary libraries and components
 import AdminNavbar from "@/app/components/AdminNavbar";
 import React from "react";
+import './dashboard.css'
 
-const page = () => {
+const AdminDashboardPage = () => {
   return (
     <div className="adminDash">
+      {/* Admin Navbar */}
       <div className="navbar">
         <AdminNavbar />
       </div>
+
+      {/* Admin Dashboard Content */}
       <div className="right-side">
         <div className="admin-dashboard-contents">
-          <h1> Admin Dashboard </h1>
-          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor minima repudiandae adipisci animi. Obcaecati nostrum at voluptas doloribus odio labore laboriosam cumque soluta iusto! Saepe eius temporibus, expedita quas quae adipisci quidem nostrum aliquam autem porro at officiis eligendi neque a alias pariatur itaque natus possimus et non officia. Eos pariatur ullam necessitatibus. Nihil totam nisi sint id! Voluptate odio tempora eos accusantium minima sunt optio incidunt doloribus? Enim similique vitae ipsa quisquam in magni ex voluptas. Repellendus mollitia atque nulla minus voluptate eligendi numquam nobis hic molestias itaque quidem necessitatibus vel nemo corporis molestiae repellat dignissimos incidunt ipsum sint sapiente, sit totam accusamus sequi fugit. Corrupti, natus soluta eos alias ipsam consequatur laudantium dicta sit numquam, vero exercitationem quod. Repudiandae reprehenderit temporibus esse aliquid, harum doloribus molestias consequatur quisquam, perferendis soluta ullam, saepe optio? Placeat ea assumenda, rem voluptate at provident ipsam blanditiis esse minima iure beatae commodi eaque aliquam officiis ad quos quae qui animi consectetur ab nemo fugiat. Officiis mollitia veritatis repudiandae, alias obcaecati amet laudantium dolores, et repellendus molestiae ex ullam sed maiores sit dicta nam, tempore aliquid perspiciatis possimus fugit pariatur vero eius! Placeat unde at officia. Delectus necessitatibus reiciendis, quam, corporis tempora, quidem numquam omnis laudantium excepturi veritatis itaque. Corrupti harum nobis sint nostrum, fuga velit enim, aspernatur itaque ad animi, veritatis officiis totam reiciendis? Laudantium doloremque dolor quo reprehenderit maiores sed soluta, et hic commodi earum quidem, quaerat tempora laboriosam vitae asperiores quod velit! Omnis unde optio nulla atque nobis, voluptatum doloremque a! </p>
+          <h1>Admin Dashboard</h1>
+
+          {/* User Manual */}
+          <div className="user-manual">
+            <h3>User Manual:</h3>
+
+            <h4>1. Add New Candidate:</h4>
+            <p>
+              - As an admin, you can add candidates to the election. Fill in the candidate's details, including name, age, party, and Ethereum address. Click the "Add Candidate" button to include them in the election.
+            </p>
+            <br />
+
+
+            <h4>2. Candidates Information:</h4>
+            <p>
+              - View detailed information about all candidates including their name, age, party, address, and vote count.
+            </p>
+            <br />
+
+
+            <h4>3. Voting Control:</h4>
+            <p>
+              - To start or end the voting process, click on the "Start Voting" or "End Voting" button respectively.
+            </p>
+            <p>
+              - Set the duration for voting in minutes before starting the voting process.
+            </p>
+            <p>
+              - After the voting period ends, click on the "Declare Result" button to announce the winner.
+            </p>
+            <p>
+              - Once the result is declared, the winner's name and details will be displayed in this section.
+            </p>
+            <br />
+
+            
+            <h4>4. Admin Navbar:</h4>
+            <p>
+              - Use the navigation bar to access different sections of the admin dashboard easily.
+            </p>
+            <p>
+              - Important notifications and updates will be displayed here for quick reference.
+            </p>
+
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default page;
+export default AdminDashboardPage;
+

@@ -82,7 +82,36 @@ const page = () => {
         <div className="voter-dashboard-container">
           <div className="voter-dashboard">
             <h1> Voter Dashboard </h1> <br />
-            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe laborum totam hic ipsum ducimus. Ut velit similique rerum consequatur temporibus cupiditate, expedita numquam quisquam tempora iure, sint delectus assumenda excepturi repellendus commodi ea blanditiis vel qui dolorum nam nostrum corrupti reprehenderit tempore. Dolorum consequuntur vero eum praesentium dolore facilis, quidem aperiam cum excepturi. Non, nihil vitae voluptate porro soluta magni placeat dolorum blanditiis autem, aut fugiat, libero fugit facilis corporis id doloribus. Nesciunt amet voluptates sapiente eos exercitationem ullam officiis quae voluptatibus. Cumque facilis vitae doloribus. Dignissimos ex facere placeat quia vel! Dignissimos eius autem voluptatibus doloribus, nesciunt, quas totam fugiat quo ducimus mollitia, provident facere. Ex facilis dolorum molestiae! Perspiciatis iste quis repudiandae in voluptatem, debitis officia quod eligendi sapiente est necessitatibus rem veniam aut commodi quia? Quas magnam quidem distinctio, cum quis qui, magni totam rem ut voluptates saepe itaque? Quidem quis amet iure aspernatur asperiores sequi eius doloremque quasi repudiandae delectus. Fugit qui recusandae ipsa at. Praesentium soluta ad totam, deleniti exercitationem tenetur aliquam mollitia quasi earum, voluptates rem non id natus? Esse similique laboriosam impedit, nemo iste asperiores enim, unde accusantium vel libero commodi placeat ullam ratione dolores natus quibusdam, vitae perferendis voluptatum tempora voluptatibus repellendus ducimus? Recusandae eius consequatur porro quam libero vero non cumque deleniti nihil architecto temporibus, sequi quas, exercitationem similique beatae deserunt ea! Odio quo quisquam, deleniti minus sunt iusto vel fuga exercitationem adipisci corrupti, nihil hic totam recusandae magnam. Ipsam assumenda amet nobis corrupti possimus iste recusandae quisquam cum quidem voluptatibus. </p>
+            <h3>User Manual:</h3>
+
+            <h4>1. Registration Phase:</h4>
+            <p>
+              - During the registration phase, voters can register for the upcoming election. Fill in the required details and click the "Register" button.
+            </p>
+            <br />
+
+            <h4>2. Cast Your Vote:</h4>
+            <p>
+              - As a registered voter, you can cast your vote for your preferred candidate. Click the "Vote Now" button, select your candidate, and submit your vote.
+            </p>
+            <br />
+
+            <h4>3. Election Information:</h4>
+            <p>
+              - View information about the ongoing election, including the list of candidates and their details.
+            </p>
+            <br />
+
+            <h4>4. Voting Status:</h4>
+            <p>
+              - Check the status of the voting process, whether it is open or closed.
+            </p>
+            <br />
+
+            <h4>5. Important Notices:</h4>
+            <p>
+              - Any important notifications or updates related to the election will be displayed here.
+            </p>
           </div>
         </div>
 

@@ -1,0 +1,49 @@
+/* Admin dashboard contents styles */
+.admin-dashboard-contents {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  h2 {
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* User manual styles */
+  .user-manual {
+    margin-top: 20px;
+  }
+  
+  h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  h4 {
+    color: #555;
+    margin-top: 15px;
+  }
+  
+  p {
+    color: #777;
+  }
+  
+  /* Buttons styles */
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
