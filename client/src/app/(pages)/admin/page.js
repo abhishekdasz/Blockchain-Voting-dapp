@@ -4,12 +4,12 @@ import { ethers } from "ethers";
 import abi from '../../contract/Voting.json';
 import { useRouter } from 'next/navigation';
 import CON_ADDRESS from '@/app/constants';
-import AdminDashboard from '@/app/components/AdminDashboard';
 
 
 const Page = () => {
     const router = useRouter();
     const [provider, setProvider] = useState(null);
+
     const [account, setAccount] = useState(null);
     const [isConnected, setIsConnected] = useState(false);
     const [votingStatus, setVotingStatus] = useState(false);
