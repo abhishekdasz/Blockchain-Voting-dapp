@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { ethers } from "ethers";
 import abi from '../../../contract/Voting.json'
-import VoterReg from '@/app/components/VoterReg'
 import { useRouter } from 'next/navigation';
 import CON_ADDRESS from '@/app/constants';
 import VoterNavbar from '@/app/components/VoterNavbar';
