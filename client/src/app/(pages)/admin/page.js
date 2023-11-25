@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from "ethers";
 import abi from '../../contract/Voting.json';
-import AdminLogin from '@/app/components/AdminLogin';
 import { useRouter } from 'next/navigation';
 import CON_ADDRESS from '@/app/constants';
 import AdminDashboard from '@/app/components/AdminDashboard';
