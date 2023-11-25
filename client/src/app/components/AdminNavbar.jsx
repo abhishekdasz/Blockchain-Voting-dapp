@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import "./AdminNavbar.css";
 
 const AdminNavbar = () => {
   const [active, setActive] = useState();
