@@ -1,18 +1,18 @@
-'use client'
+"use client";
 // SPDX-License-Identifier: MIT
 // (Your solidity contract code...)
 
 // React component code
-import React, { useState, useEffect } from 'react';
-import VoterNavbar from '@/app/components/VoterNavbar';
-import { ethers } from 'ethers';
-import abi from '../../../contract/Voting.json';
-import CON_ADDRESS from '@/app/constants';
+import React, { useState, useEffect } from "react";
+import VoterNavbar from "@/app/components/VoterNavbar";
+import { ethers } from "ethers";
+import abi from "../../../contract/Voting.json";
+import CON_ADDRESS from "@/app/constants";
 
 const Page = () => {
-  const [voterName, setVoterName] = useState('');
-  const [voterAge, setVoterAge] = useState('');
-  const [aadharno, setAadharno] = useState('');
+  const [voterName, setVoterName] = useState("");
+  const [voterAge, setVoterAge] = useState("");
+  const [aadharno, setAadharno] = useState("");
   const [isRegistered, setIsRegistered] = useState(false);
 
   const contractAddress = CON_ADDRESS;
@@ -21,7 +21,7 @@ const Page = () => {
   const checkRegistrationStatus = async () => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send('eth_requestAccounts', []);
+      await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner();
       const contractInstance = new ethers.Contract(
         contractAddress,
@@ -34,18 +34,18 @@ const Page = () => {
 
       // Redirect to voting page if the account is registered
       if (registered) {
-        alert('Already registered. Go and mark your vote !!!');
+        alert("Already registered. Go and mark your vote !!!");
       }
     } catch (error) {
-      console.error('Error checking registration status:', error.message);
+      console.error("Error checking registration status:", error.message);
     }
   };
 
   const registerVoter = async () => {
     try {
       if (!voterName || !voterAge || !aadharno) {
-        console.error('Please fill in all the fields');
-        alert('Please fill in all the fields')
+        console.error("Please fill in all the fields");
+        alert("Please fill in all the fields");
         return;
       }
 
@@ -58,7 +58,7 @@ const Page = () => {
 
       // Connect to the Ethereum provider
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send('eth_requestAccounts', []);
+      await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
         contractAddress,
@@ -78,21 +78,21 @@ const Page = () => {
       const receipt = await transaction.wait();
 
       if (receipt.status === 1) {
-        console.log('Voter registered successfully');
+        console.log("Voter registered successfully");
         // After registering a voter, fetch and display all voters
         // (you can choose to redirect to the voting page here if needed)
         setIsRegistered(true);
-        alert('Voter registered successfully');
-        setVoterName('');
-        setVoterAge('');
-        setAadharno('');
+        alert("Voter registered successfully");
+        setVoterName("");
+        setVoterAge("");
+        setAadharno("");
       } else {
         console.error(
-          'Transaction failed. Check contract events for more details.'
+          "Transaction failed. Check contract events for more details."
         );
       }
     } catch (error) {
-      console.error('Error registering voter:', error.message);
+      console.error("Error registering voter:", error.message);
     }
   };
 
@@ -127,8 +127,9 @@ const Page = () => {
             </div>
             <div>
               <label> Aadhar Number </label>
-              <input type="number" 
-              onChange={(e) => setAadharno(e.target.value)}
+              <input
+                type="number"
+                onChange={(e) => setAadharno(e.target.value)}
               />
             </div>
           </div>
@@ -140,4 +141,3 @@ const Page = () => {
 };
 
 export default Page;
-

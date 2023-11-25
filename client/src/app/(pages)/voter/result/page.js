@@ -1,10 +1,10 @@
 // Import necessary libraries and components
-'use client'
-import React, { useEffect, useState } from 'react';
-import { ethers } from 'ethers';
-import abi from '../../../contract/Voting.json';
-import VoterNavbar from '@/app/components/VoterNavbar';
-import CON_ADDRESS from '@/app/constants';
+"use client";
+import React, { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import abi from "../../../contract/Voting.json";
+import VoterNavbar from "@/app/components/VoterNavbar";
+import CON_ADDRESS from "@/app/constants";
 
 const Page = () => {
   const [provider, setProvider] = useState(null);
@@ -23,11 +23,11 @@ const Page = () => {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         setProvider(provider);
-        await provider.send('eth_requestAccounts', []);
+        await provider.send("eth_requestAccounts", []);
         const signer = provider.getSigner();
         const address = await signer.getAddress();
         setAccount(address);
-        console.log('MetaMask connected' + address);
+        console.log("MetaMask connected" + address);
         setIsConnected(true);
         getCurrentStatus();
       } catch (error) {
@@ -39,12 +39,15 @@ const Page = () => {
   // Handle MetaMask account changes
   useEffect(() => {
     if (window.ethereum) {
-      window.ethereum.on('accountsChanged', handleAccountsChanged);
+      window.ethereum.on("accountsChanged", handleAccountsChanged);
     }
 
     return () => {
       if (window.ethereum) {
-        window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+        window.ethereum.removeListener(
+          "accountsChanged",
+          handleAccountsChanged
+        );
       }
     };
   }, [account]);
@@ -62,11 +65,15 @@ const Page = () => {
   // Get the current voting status
   const getCurrentStatus = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []);
+    await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
-    const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+    const contractInstance = new ethers.Contract(
+      contractAddress,
+      contractAbi,
+      signer
+    );
     const status = await contractInstance.getVotingStatus();
-    console.log('Voting Status:', status);
+    console.log("Voting Status:", status);
     setVotingStatus(status);
 
     // If the voting has ended, fetch the winner details
@@ -79,13 +86,17 @@ const Page = () => {
   const fetchWinnerDetails = async () => {
     try {
       const signer = provider.getSigner();
-      const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+      const contractInstance = new ethers.Contract(
+        contractAddress,
+        contractAbi,
+        signer
+      );
       const result = await contractInstance.getWinner();
-      console.log('Winner Details:', result);
+      console.log("Winner Details:", result);
       setWinner(result.winnerName);
       setCandidates(result.candidates);
     } catch (error) {
-      console.error('Error fetching winner details:', error);
+      console.error("Error fetching winner details:", error);
     }
   };
 
@@ -103,7 +114,10 @@ const Page = () => {
         <div className="result-card">
           Result
           {votingStatus ? (
-            <p>Voting is still in progress. Winner details will be available after voting ends.</p>
+            <p>
+              Voting is still in progress. Winner details will be available
+              after voting ends.
+            </p>
           ) : winner ? (
             <div>
               <h2>Winner</h2>

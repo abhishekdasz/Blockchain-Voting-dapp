@@ -64,29 +64,28 @@ const Page = () => {
   };
 
   // Declare result
-// Declare result
-const declareResult = async () => {
-  try {
-    // Connect to the Ethereum provider
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      contractAddress,
-      contractAbi,
-      signer
-    );
+  // Declare result
+  const declareResult = async () => {
+    try {
+      // Connect to the Ethereum provider
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        contractAddress,
+        contractAbi,
+        signer
+      );
 
-    // Call the declareResult function on the smart contract
-    const result = await contract.declareResult();
-    console.log("Result declared successfully", result);
+      // Call the declareResult function on the smart contract
+      const result = await contract.declareResult();
+      console.log("Result declared successfully", result);
 
-    // Update the component state with the fetched winner and candidates
-    setWinner(result[0]);
-    setCandidates(result[1]);
-  } catch (error) {
-    console.error("Error declaring result:", error);
-  }
-};
-
+      // Update the component state with the fetched winner and candidates
+      setWinner(result[0]);
+      setCandidates(result[1]);
+    } catch (error) {
+      console.error("Error declaring result:", error);
+    }
+  };
 
   // Fetch all candidates
   const getAllCandidates = async () => {
@@ -151,36 +150,36 @@ const declareResult = async () => {
   }, []);
 
   // Listen for WinnerDeclared event
-// Listen for WinnerDeclared event
-useEffect(() => {
-  const fetchWinner = async () => {
-    try {
-      // Connect to the Ethereum provider
-      const contract = new ethers.Contract(
-        contractAddress,
-        contractAbi,
-        provider
-      );
+  // Listen for WinnerDeclared event
+  useEffect(() => {
+    const fetchWinner = async () => {
+      try {
+        // Connect to the Ethereum provider
+        const contract = new ethers.Contract(
+          contractAddress,
+          contractAbi,
+          provider
+        );
 
-      // Listen for WinnerDeclared event
-      contract.on("WinnerDeclared", (winnerName, candidates) => {
-        console.log("Winner Declared:", winnerName);
-        setWinner(winnerName);
-        setWinnerDetails(candidates);
-        // You can also update the candidates state if needed
-      });
+        // Listen for WinnerDeclared event
+        contract.on("WinnerDeclared", (winnerName, candidates) => {
+          console.log("Winner Declared:", winnerName);
+          setWinner(winnerName);
+          setWinnerDetails(candidates);
+          // You can also update the candidates state if needed
+        });
 
-      // Cleanup the event listener when the component unmounts
-      return () => {
-        contract.removeAllListeners("WinnerDeclared");
-      };
-    } catch (error) {
-      console.error("Error listening for WinnerDeclared event:", error);
-    }
-  };
+        // Cleanup the event listener when the component unmounts
+        return () => {
+          contract.removeAllListeners("WinnerDeclared");
+        };
+      } catch (error) {
+        console.error("Error listening for WinnerDeclared event:", error);
+      }
+    };
 
-  fetchWinner();
-}, []);
+    fetchWinner();
+  }, []);
 
   // Render JSX
   return (
@@ -198,7 +197,10 @@ useEffect(() => {
               </div>
             ) : (
               <div>
-                <p> Voting has not started yet. <br /> Please start the Voting !!! </p>
+                <p>
+                  {" "}
+                  Voting has not started yet. <br /> Please start the Voting !!!{" "}
+                </p>
                 <label>Voting Duration (minutes): </label>
                 <input
                   type="number"
@@ -213,30 +215,27 @@ useEffect(() => {
               <button onClick={declareResult}>Declare Result</button>
             )}
           </div>
+          <br /> <h1>Results:</h1>
+          {winner && (
+            <div className="winner-section">
+              <h3>Congratulations, Winner is: {winner}</h3>
 
-<br />  <h1>Results:</h1> 
-{winner && (
-  <div className="winner-section">
-    <h3>Congratulations, Winner is: {winner}</h3>
-
-    <br />
-    <div>
-      <h2> Vote Stats: </h2>
-    {winnerDetails.map((details, index) => (
-  <div key={index}>
-    <p>Name: {details[0]}</p>
-    <p>Age: {details[1].toString()}</p>
-    {/* <p>Address: {details[2]}</p> */}
-    <p>Party: {details[3]}</p>
-    <p>Votes: {details[4].toString()}</p>
-    <br />
-  </div>
-))}
-
-    </div>
-  </div>
-)}
-
+              <br />
+              <div>
+                <h2> Vote Stats: </h2>
+                {winnerDetails.map((details, index) => (
+                  <div key={index}>
+                    <p>Name: {details[0]}</p>
+                    <p>Age: {details[1].toString()}</p>
+                    {/* <p>Address: {details[2]}</p> */}
+                    <p>Party: {details[3]}</p>
+                    <p>Votes: {details[4].toString()}</p>
+                    <br />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -244,4 +243,3 @@ useEffect(() => {
 };
 
 export default Page;
-  
