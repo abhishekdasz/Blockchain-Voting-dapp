@@ -47,16 +47,15 @@ const Page = () => {
       setHasVoted(true);
     } catch (error) {
       console.error("Error submitting vote:", error);
-      if (error.message.includes("Only registered voters can call this function")) 
-      {
+      if (
+        error.message.includes("Only registered voters can call this function")
+      ) {
         alert("Only registered voters can vote, so kindly register first.");
-      } 
-      else if(error.message.includes("Voting is not currently open")) 
-      {
-        alert("Voting is not currently open, please wait until the Voting has started.");
-      }
-      else 
-      {
+      } else if (error.message.includes("Voting is not currently open")) {
+        alert(
+          "Voting is not currently open, please wait until the Voting has started."
+        );
+      } else {
         alert("An error occurred while submitting your vote");
       }
     }
@@ -109,7 +108,14 @@ const Page = () => {
                       <p> Name: {candidate.name} </p>
                       <p> Age: {candidate.age} </p>
                       <p> Party: {candidate.party} </p>
-                      <p> Address:{`${candidate.candidateAddress.slice(0,5)}....${candidate.candidateAddress.slice(-5)}`} </p>
+                      <p>
+                        {" "}
+                        Address:
+                        {`${candidate.candidateAddress.slice(
+                          0,
+                          5
+                        )}....${candidate.candidateAddress.slice(-5)}`}{" "}
+                      </p>
                       {/* <p> VoteCount: {candidate.voteCount} </p> */}
                       <button onClick={() => voteForCandidate(index)}>
                         Votee
@@ -117,9 +123,7 @@ const Page = () => {
                     </div>
                     <div className="candidate-img">
                       <Image
-                        src={
-                          candidateImages[index % candidateImages.length]
-                        }
+                        src={candidateImages[index % candidateImages.length]}
                         alt="Candidate Image"
                         width={100}
                         height={100}
