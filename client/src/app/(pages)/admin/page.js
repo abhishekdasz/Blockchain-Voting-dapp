@@ -99,21 +99,7 @@ const Page = () => {
     router.push("/");
   };
 
-  return (
-    <div>
-      Admin
-      {/* <div className="login-admin">
-            {isConnected && isAdmin ? ( // Only render AddCandidate if isConnected and isAdmin
-                <AdminDashboard account={account} provider={provider} />
-            ) : (
-                <AdminLogin connectWallet={connectContract} />
-            )}
-            </div>
-            <div className="logout">
-              <button onClick={handleAdminLogout}> Logout </button>
-            </div> */}
-    </div>
-  );
+  return <div>Admin</div>;
 };
 
 export default Page;
