@@ -5,7 +5,6 @@ import abi from "../../../contract/Voting.json";
 import CON_ADDRESS, { candidateImages } from "../../../constants";
 import AdminNavbar from "@/app/components/AdminNavbar";
 import Image from "next/image";
-// import "./AdminDashboard.css";
 
 
 const AllCandidatesInfo = () => {

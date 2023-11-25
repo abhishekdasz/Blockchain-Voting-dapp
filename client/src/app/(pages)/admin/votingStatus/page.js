@@ -214,40 +214,6 @@ useEffect(() => {
             )}
           </div>
 
-          {/* <div className="candidates-information">
-            <div>
-              <h2>All Candidates</h2>
-              <div className="candidates">
-                {candidates.map((candidate, index) => (
-                  <div className="candidates-info" key={index}>
-                    <div className="info">
-                      <p> Name: {candidate.name} </p>
-                      <p> Age: {candidate.age} </p>
-                      <p> Party: {candidate.party} </p>
-                      <p>
-                        {" "}
-                        Address:{" "}
-                        {`${candidate.candidateAddress.slice(
-                          0,
-                          5
-                        )}....${candidate.candidateAddress.slice(-5)}`}{" "}
-                      </p>
-                      <p> Votes: {candidate.voteCount} </p>
-                    </div>
-                    <div className="candidate-img">
-                      <Image
-                        src={candidateImages[index % candidateImages.length]}
-                        alt="Candidate Image"
-                        width={100}
-                        height={100}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div> */}
-
 <br />  <h1>Results:</h1> 
 {winner && (
   <div className="winner-section">
