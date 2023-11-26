@@ -24,16 +24,16 @@ npx hardhat run scripts/deploy.js
 - Voting Area: Directing registered users to the voting page, ensuring a secure and straightforward voting experience.
 - Results: Providing users with instant access to election outcomes, fostering transparency and accountability in the democratic process.
 
-Home Page of Website
+## Home Page of Website
 ![Screenshot 2023-11-26 195501](https://github.com/abhishekdasz/Blockchain-Voting-dapp/assets/87275238/a1250c37-6b00-47d3-b4b7-f52d901be446)
 
-Add Candidate Section for Admin only 
+## Add Candidate Section for Admin only 
 ![Screenshot (495)](https://github.com/abhishekdasz/Blockchain-Voting-dapp/assets/87275238/2d394d6a-db6a-4d0d-b068-bbf4e9ca0c0f)
 
-Candidates Info section for Admin only
+## Candidates Info section for Admin only
 ![Screenshot (496)](https://github.com/abhishekdasz/Blockchain-Voting-dapp/assets/87275238/f8907e9b-47c7-4a1c-9953-b690d26874f4)
 
-Declare results for Admin only
+## Declare results for Admin only
 ![Screenshot (498)](https://github.com/abhishekdasz/Blockchain-Voting-dapp/assets/87275238/b350dba0-db70-45da-b4b1-25226041c8d1)
 
 Voter's self registration page
