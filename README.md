@@ -36,10 +36,10 @@ npx hardhat run scripts/deploy.js
 ## Declare results for Admin only
 ![Screenshot (498)](https://github.com/abhishekdasz/Blockchain-Voting-dapp/assets/87275238/b350dba0-db70-45da-b4b1-25226041c8d1)
 
-Voter's self registration page
+## Voter's self registration page
 ![Screenshot (500)](https://github.com/abhishekdasz/Blockchain-Voting-dapp/assets/87275238/7b32da0b-2eac-4ea0-bd6c-fa94a63c3154)
 
-Voting section for the voters
+## Voting section for the voters
 ![Screenshot (501)](https://github.com/abhishekdasz/Blockchain-Voting-dapp/assets/87275238/b448a62e-3a72-4ac8-b935-63a1e71572ee)
 
 
