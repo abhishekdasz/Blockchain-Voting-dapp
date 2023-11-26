@@ -1,4 +1,4 @@
-# Sample Hardhat Project
+![image](https://github.com/abhishekdasz/Blockchain-Voting-dapp/assets/87275238/1073dfb4-4050-4b55-9c2b-545043590575)# Sample Hardhat Project
 
 This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
 
@@ -12,6 +12,17 @@ npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
 
+Admin's Component:
+Dashboard:  Overview of parties and voters through dynamic charts for informed decision-making.
+Add Candidate: Empowering the admin to seamlessly add candidates, ensuring a transparent display for users.
+Voting Control: Enabling admins to initiate and manage elections, allowing user voting only within specified start and end dates.
+Candidates Information: Providing admins with a comprehensive overview of candidates and the ability to rectify any inaccuracies in candidate details.
+
+Voter's Component:
+Dashboard: Offering users a centralized platform to access party and candidate information, promoting an informed electoral experience.
+Voter Register: Guiding users through a smooth registration process, a prerequisite for exercising their voting rights.
+Voting Area: Directing registered users to the voting page, ensuring a secure and straightforward voting experience.
+Results: Providing users with instant access to election outcomes, fostering transparency and accountability in the democratic process.
 
 Home Page of Website
 ![Screenshot 2023-11-26 195501](https://github.com/abhishekdasz/Blockchain-Voting-dapp/assets/87275238/a1250c37-6b00-47d3-b4b7-f52d901be446)
