@@ -12,11 +12,11 @@ npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
 
-#Admin's Component:
-Dashboard:  Overview of parties and voters through dynamic charts for informed decision-making.
-Add Candidate: Empowering the admin to seamlessly add candidates, ensuring a transparent display for users.
-Voting Control: Enabling admins to initiate and manage elections, allowing user voting only within specified start and end dates.
-Candidates Information: Providing admins with a comprehensive overview of candidates and the ability to rectify any inaccuracies in candidate details.
+## Admin's Component:
+- Dashboard:  Overview of parties and voters through dynamic charts for informed decision-making.
+- Add Candidate: Empowering the admin to seamlessly add candidates, ensuring a transparent display for users.
+- Voting Control: Enabling admins to initiate and manage elections, allowing user voting only within specified start and end dates.
+- Candidates Information: Providing admins with a comprehensive overview of candidates and the ability to rectify any inaccuracies in candidate details.
 
 #Voter's Component:
 Dashboard: Offering users a centralized platform to access party and candidate information, promoting an informed electoral experience.
