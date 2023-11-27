@@ -1,6 +1,6 @@
-#Sample Hardhat Project
+## Smart Voting System using Blockchain Technologies
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This Smart Voting System using Blockchain Technologies seek to overcome the limitations of the existing manual system.
 
 Try running some of the following tasks:
 
