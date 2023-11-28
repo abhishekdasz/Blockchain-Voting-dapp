@@ -1,4 +1,4 @@
-## Smart Voting System using Blockchain Technologies
+## Smart Voting System using Blockchain Technologies             
 
 This Smart Voting System using Blockchain Technologies seek to overcome the limitations of the existing manual system.
 
